@@ -1,11 +1,15 @@
 package br.com.acmepay.domain;
 
+import br.com.acmepay.exception.BalanceToTransferInsufficientException;
 import br.com.acmepay.exception.BalanceToWithDrawException;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Data
 public class Account {
     private Long id;
     private Integer number;
@@ -26,6 +30,15 @@ public class Account {
             this.balance.subtract(amount);
         } else {
             throw new BalanceToWithDrawException("error-withdraw");
+        }
+    }
+
+    public void transfer(Account account, BigDecimal amount) throws BalanceToTransferInsufficientException {
+        try {
+            this.withdraw(amount);
+            account.deposit(amount);
+        } catch (BalanceToWithDrawException e) {
+            throw new BalanceToTransferInsufficientException("error-transfer");
         }
 
     }
