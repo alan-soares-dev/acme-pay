@@ -12,5 +12,4 @@ public class Transaction {
     private Integer source_account;
     private Integer destination_account;
     private BigDecimal amount;
-
 }
