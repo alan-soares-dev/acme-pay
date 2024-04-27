@@ -1,13 +1,13 @@
-package br.com.acmepay.domain;
+package br.com.acmepay.application.domain.model;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class Card {
+public class CardDomain {
     private Long id;
     private String flag;
     private BigDecimal card_limit;
-    private Account card_account;
+    private AccountDomain card_accountDomain;
 }

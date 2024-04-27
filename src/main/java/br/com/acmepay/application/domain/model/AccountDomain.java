@@ -1,6 +1,6 @@
-package br.com.acmepay.domain;
+package br.com.acmepay.application.domain.model;
 
-import br.com.acmepay.exception.BalanceToWithDrawException;
+import br.com.acmepay.application.domain.exception.BalanceToWithDrawException;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -9,29 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Account {
+public class AccountDomain {
     private Long id;
     private Integer number;
     private Integer agency;
     private BigDecimal balance;
-    private Customer customer;
-    private List<Card> cards;
+    private CustomerDomain customerDomain;
+    private List<CardDomain> cardDomains;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
     private Boolean closed;
 
     private List<String> transactions = new ArrayList<>();
 
-    public void create(Account account) {
-        this.setId(account.id);
+    public void create(AccountDomain accountDomain) {
+        this.setId(accountDomain.id);
         this.setCreated_at(LocalDateTime.now());
         this.setUpdated_at(null);
-        this.setCustomer(null);
-        this.setCards(new ArrayList<>());
+        this.setCustomerDomain(null);
+        this.setCardDomains(new ArrayList<>());
         this.setBalance(BigDecimal.ZERO);
-        this.setNumber(account.number);
-        this.setAgency(account.agency);
-        this.setClosed(account.closed);
+        this.setNumber(accountDomain.number);
+        this.setAgency(accountDomain.agency);
+        this.setClosed(accountDomain.closed);
         this.addTransaction("Account created successfully.");
     }
 
@@ -48,10 +48,10 @@ public class Account {
         this.addTransaction("New Withdraw: " + amount);
     }
 
-    public void transfer(Account account, BigDecimal amount) throws BalanceToWithDrawException {
+    public void transfer(AccountDomain accountDomain, BigDecimal amount) throws BalanceToWithDrawException {
         this.withdraw(amount);
-        account.deposit(amount);
-        this.addTransaction("New Transfer: " + amount + " to account: " + account.getNumber());
+        accountDomain.deposit(amount);
+        this.addTransaction("New Transfer: " + amount + " to account: " + accountDomain.getNumber());
     }
 
     private boolean hasBalance(BigDecimal amount) {

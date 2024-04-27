@@ -1,4 +1,4 @@
-package br.com.acmepay.domain;
+package br.com.acmepay.application.domain.model;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class Transaction {
+public class NotificationDomain {
     private Long id;
     private LocalDateTime data_transaction;
     private Integer source_account;

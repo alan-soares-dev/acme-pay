@@ -1,12 +1,8 @@
 package br.com.acmepay;
 
-import br.com.acmepay.domain.Account;
-import br.com.acmepay.domain.Customer;
-import br.com.acmepay.exception.BalanceToWithDrawException;
-import br.com.acmepay.exception.DocumentInvalidException;
-import br.com.acmepay.exception.EmailInvalidException;
-
-import java.math.BigDecimal;
+import br.com.acmepay.application.domain.model.CustomerDomain;
+import br.com.acmepay.application.domain.exception.DocumentInvalidException;
+import br.com.acmepay.application.domain.exception.EmailInvalidException;
 
 /**
  * Hello world!
@@ -15,7 +11,7 @@ import java.math.BigDecimal;
 public class App 
 {
     public static void main( String[] args ) throws DocumentInvalidException, EmailInvalidException {
-        Customer c1 = new Customer();
+        CustomerDomain c1 = new CustomerDomain();
         c1.setName("A");
         c1.setId(1L);
         c1.setDocument("123");
@@ -23,7 +19,7 @@ public class App
         c1.setEmail("email@email.com");
         c1.createCustomer(c1);
 
-        Customer c2 = new Customer();
+        CustomerDomain c2 = new CustomerDomain();
         c2.setName("B");
         c2.setId(2L);
         c2.setDocument("543");
@@ -31,7 +27,7 @@ public class App
         c2.setEmail("abc@email.com");
         c1.createCustomer(c2);
 
-        Customer c3 = new Customer();
+        CustomerDomain c3 = new CustomerDomain();
         c3.setName("C");
         c3.setId(3L);
         c3.setDocument("789");
