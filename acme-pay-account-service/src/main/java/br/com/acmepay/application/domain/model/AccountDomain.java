@@ -1,12 +1,16 @@
 package br.com.acmepay.application.domain.model;
 
 import br.com.acmepay.application.domain.exception.BalanceToWithDrawException;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccountDomain {
     private Long id;
     private Integer number;
