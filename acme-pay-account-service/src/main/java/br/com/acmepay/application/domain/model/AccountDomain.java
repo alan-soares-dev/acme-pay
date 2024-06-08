@@ -1,7 +1,9 @@
 package br.com.acmepay.application.domain.model;
 
 import br.com.acmepay.application.domain.exception.BalanceToWithDrawException;
+import br.com.acmepay.application.ports.out.ICreateAccount;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AccountDomain {
     private Long id;
     private Integer number;
@@ -21,11 +24,12 @@ public class AccountDomain {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    public void create() {
+    public void create(ICreateAccount createAccount) {
+        createAccount.execute(this);
     }
 
     public void deposit(BigDecimal amount) {
-        this.balance = balance.add(amount);
+        this.balance.add(amount);
     }
 
     public void withdraw(BigDecimal amount) throws BalanceToWithDrawException {
